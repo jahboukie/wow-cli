@@ -1,0 +1,13 @@
+# dependencies
+node_modules/
+
+# build output
+dist/
+
+# internal agent repo and temp patches
+.wow/git/
+.wow/tmp-*.diff
+
+# misc
+.DS_Store
+Thumbs.db

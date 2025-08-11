@@ -1,0 +1,755 @@
+{
+  "files": 17,
+  "symbols": [
+    {
+      "name": "program",
+      "kind": "variable",
+      "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\cli.ts",
+      "line": 13,
+      "col": 7
+    },
+    {
+      "name": "addFeatureCommand",
+      "kind": "function",
+      "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\commands\\addFeature.ts",
+      "line": 4,
+      "col": 1
+    },
+    {
+      "name": "plan",
+      "kind": "variable",
+      "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\commands\\addFeature.ts",
+      "line": 5,
+      "col": 9
+    },
+    {
+      "name": "readAllStdin",
+      "kind": "function",
+      "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\commands\\apply.ts",
+      "line": 7,
+      "col": 1
+    },
+    {
+      "name": "data",
+      "kind": "variable",
+      "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\commands\\apply.ts",
+      "line": 9,
+      "col": 9
+    },
+    {
+      "name": "applyCommand",
+      "kind": "function",
+      "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\commands\\apply.ts",
+      "line": 16,
+      "col": 1
+    },
+    {
+      "name": "patch",
+      "kind": "variable",
+      "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\commands\\apply.ts",
+      "line": 17,
+      "col": 9
+    },
+    {
+      "name": "msg",
+      "kind": "variable",
+      "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\commands\\apply.ts",
+      "line": 19,
+      "col": 11
+    },
+    {
+      "name": "branch",
+      "kind": "variable",
+      "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\commands\\apply.ts",
+      "line": 25,
+      "col": 9
+    },
+    {
+      "name": "gate",
+      "kind": "variable",
+      "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\commands\\apply.ts",
+      "line": 28,
+      "col": 9
+    },
+    {
+      "name": "cleanCommand",
+      "kind": "function",
+      "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\commands\\clean.ts",
+      "line": 5,
+      "col": 1
+    },
+    {
+      "name": "plan",
+      "kind": "variable",
+      "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\commands\\clean.ts",
+      "line": 7,
+      "col": 9
+    },
+    {
+      "name": "fixBuildCommand",
+      "kind": "function",
+      "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\commands\\fixBuild.ts",
+      "line": 5,
+      "col": 1
+    },
+    {
+      "name": "plan",
+      "kind": "variable",
+      "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\commands\\fixBuild.ts",
+      "line": 7,
+      "col": 9
+    },
+    {
+      "name": "indexCommand",
+      "kind": "function",
+      "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\commands\\index.ts",
+      "line": 3,
+      "col": 1
+    },
+    {
+      "name": "idx",
+      "kind": "variable",
+      "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\commands\\index.ts",
+      "line": 4,
+      "col": 9
+    },
+    {
+      "name": "initCommand",
+      "kind": "function",
+      "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\commands\\init.ts",
+      "line": 6,
+      "col": 1
+    },
+    {
+      "name": "dir",
+      "kind": "variable",
+      "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\commands\\init.ts",
+      "line": 8,
+      "col": 9
+    },
+    {
+      "name": "ledgerCommand",
+      "kind": "function",
+      "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\commands\\ledger.ts",
+      "line": 5,
+      "col": 1
+    },
+    {
+      "name": "file",
+      "kind": "variable",
+      "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\commands\\ledger.ts",
+      "line": 6,
+      "col": 9
+    },
+    {
+      "name": "text",
+      "kind": "variable",
+      "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\commands\\ledger.ts",
+      "line": 15,
+      "col": 11
+    },
+    {
+      "name": "lines",
+      "kind": "variable",
+      "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\commands\\ledger.ts",
+      "line": 16,
+      "col": 11
+    },
+    {
+      "name": "runCommand",
+      "kind": "function",
+      "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\commands\\run.ts",
+      "line": 4,
+      "col": 1
+    },
+    {
+      "name": "started",
+      "kind": "variable",
+      "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\commands\\run.ts",
+      "line": 5,
+      "col": 9
+    },
+    {
+      "name": "child",
+      "kind": "variable",
+      "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\commands\\run.ts",
+      "line": 7,
+      "col": 11
+    },
+    {
+      "name": "res",
+      "kind": "variable",
+      "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\commands\\run.ts",
+      "line": 8,
+      "col": 11
+    },
+    {
+      "name": "payload",
+      "kind": "variable",
+      "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\commands\\run.ts",
+      "line": 9,
+      "col": 11
+    },
+    {
+      "name": "payload",
+      "kind": "variable",
+      "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\commands\\run.ts",
+      "line": 15,
+      "col": 11
+    },
+    {
+      "name": "searchCommand",
+      "kind": "function",
+      "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\commands\\search.ts",
+      "line": 3,
+      "col": 1
+    },
+    {
+      "name": "msg",
+      "kind": "variable",
+      "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\commands\\search.ts",
+      "line": 5,
+      "col": 11
+    },
+    {
+      "name": "res",
+      "kind": "variable",
+      "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\commands\\search.ts",
+      "line": 10,
+      "col": 9
+    },
+    {
+      "name": "execute",
+      "kind": "function",
+      "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\core\\executor.ts",
+      "line": 8,
+      "col": 1
+    },
+    {
+      "name": "branch",
+      "kind": "variable",
+      "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\core\\executor.ts",
+      "line": 9,
+      "col": 9
+    },
+    {
+      "name": "cmd",
+      "kind": "variable",
+      "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\core\\executor.ts",
+      "line": 14,
+      "col": 13
+    },
+    {
+      "name": "start",
+      "kind": "variable",
+      "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\core\\executor.ts",
+      "line": 15,
+      "col": 13
+    },
+    {
+      "name": "child",
+      "kind": "variable",
+      "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\core\\executor.ts",
+      "line": 17,
+      "col": 15
+    },
+    {
+      "name": "res",
+      "kind": "variable",
+      "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\core\\executor.ts",
+      "line": 18,
+      "col": 15
+    },
+    {
+      "name": "file",
+      "kind": "variable",
+      "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\core\\executor.ts",
+      "line": 25,
+      "col": 13
+    },
+    {
+      "name": "gitPaths",
+      "kind": "function",
+      "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\core\\git.ts",
+      "line": 5,
+      "col": 1
+    },
+    {
+      "name": "cwd",
+      "kind": "variable",
+      "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\core\\git.ts",
+      "line": 6,
+      "col": 9
+    },
+    {
+      "name": "gitDir",
+      "kind": "variable",
+      "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\core\\git.ts",
+      "line": 7,
+      "col": 9
+    },
+    {
+      "name": "gitEnv",
+      "kind": "function",
+      "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\core\\git.ts",
+      "line": 11,
+      "col": 1
+    },
+    {
+      "name": "ensureGit",
+      "kind": "function",
+      "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\core\\git.ts",
+      "line": 16,
+      "col": 1
+    },
+    {
+      "name": "newBranch",
+      "kind": "function",
+      "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\core\\git.ts",
+      "line": 26,
+      "col": 1
+    },
+    {
+      "name": "name",
+      "kind": "variable",
+      "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\core\\git.ts",
+      "line": 28,
+      "col": 9
+    },
+    {
+      "name": "stageAll",
+      "kind": "function",
+      "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\core\\git.ts",
+      "line": 33,
+      "col": 1
+    },
+    {
+      "name": "commitAll",
+      "kind": "function",
+      "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\core\\git.ts",
+      "line": 38,
+      "col": 1
+    },
+    {
+      "name": "applyUnifiedDiff",
+      "kind": "function",
+      "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\core\\git.ts",
+      "line": 44,
+      "col": 1
+    },
+    {
+      "name": "tmp",
+      "kind": "variable",
+      "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\core\\git.ts",
+      "line": 46,
+      "col": 9
+    },
+    {
+      "name": "IGNORE_DIRS",
+      "kind": "variable",
+      "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\core\\indexer.ts",
+      "line": 20,
+      "col": 7
+    },
+    {
+      "name": "VALID_EXT",
+      "kind": "variable",
+      "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\core\\indexer.ts",
+      "line": 21,
+      "col": 7
+    },
+    {
+      "name": "shouldIgnore",
+      "kind": "function",
+      "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\core\\indexer.ts",
+      "line": 23,
+      "col": 1
+    },
+    {
+      "name": "parts",
+      "kind": "variable",
+      "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\core\\indexer.ts",
+      "line": 24,
+      "col": 9
+    },
+    {
+      "name": "walk",
+      "kind": "function",
+      "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\core\\indexer.ts",
+      "line": 28,
+      "col": 1
+    },
+    {
+      "name": "list",
+      "kind": "variable",
+      "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\core\\indexer.ts",
+      "line": 29,
+      "col": 9
+    },
+    {
+      "name": "full",
+      "kind": "variable",
+      "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\core\\indexer.ts",
+      "line": 31,
+      "col": 11
+    },
+    {
+      "name": "stat",
+      "kind": "variable",
+      "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\core\\indexer.ts",
+      "line": 33,
+      "col": 11
+    },
+    {
+      "name": "addTSNodeSymbols",
+      "kind": "function",
+      "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\core\\indexer.ts",
+      "line": 39,
+      "col": 1
+    },
+    {
+      "name": "add",
+      "kind": "function",
+      "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\core\\indexer.ts",
+      "line": 40,
+      "col": 3
+    },
+    {
+      "name": "parseWithTS",
+      "kind": "function",
+      "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\core\\indexer.ts",
+      "line": 63,
+      "col": 1
+    },
+    {
+      "name": "ext",
+      "kind": "variable",
+      "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\core\\indexer.ts",
+      "line": 64,
+      "col": 9
+    },
+    {
+      "name": "kind",
+      "kind": "variable",
+      "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\core\\indexer.ts",
+      "line": 65,
+      "col": 9
+    },
+    {
+      "name": "sf",
+      "kind": "variable",
+      "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\core\\indexer.ts",
+      "line": 69,
+      "col": 9
+    },
+    {
+      "name": "out",
+      "kind": "variable",
+      "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\core\\indexer.ts",
+      "line": 70,
+      "col": 9
+    },
+    {
+      "name": "parsePython",
+      "kind": "function",
+      "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\core\\indexer.ts",
+      "line": 75,
+      "col": 1
+    },
+    {
+      "name": "out",
+      "kind": "variable",
+      "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\core\\indexer.ts",
+      "line": 76,
+      "col": 9
+    },
+    {
+      "name": "lines",
+      "kind": "variable",
+      "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\core\\indexer.ts",
+      "line": 77,
+      "col": 9
+    },
+    {
+      "name": "line",
+      "kind": "variable",
+      "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\core\\indexer.ts",
+      "line": 79,
+      "col": 11
+    },
+    {
+      "name": "mFunc",
+      "kind": "variable",
+      "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\core\\indexer.ts",
+      "line": 80,
+      "col": 11
+    },
+    {
+      "name": "mClass",
+      "kind": "variable",
+      "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\core\\indexer.ts",
+      "line": 82,
+      "col": 11
+    },
+    {
+      "name": "buildIndex",
+      "kind": "function",
+      "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\core\\indexer.ts",
+      "line": 88,
+      "col": 1
+    },
+    {
+      "name": "allFiles",
+      "kind": "variable",
+      "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\core\\indexer.ts",
+      "line": 89,
+      "col": 9
+    },
+    {
+      "name": "symbols",
+      "kind": "variable",
+      "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\core\\indexer.ts",
+      "line": 93,
+      "col": 9
+    },
+    {
+      "name": "src",
+      "kind": "variable",
+      "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\core\\indexer.ts",
+      "line": 96,
+      "col": 13
+    },
+    {
+      "name": "ext",
+      "kind": "variable",
+      "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\core\\indexer.ts",
+      "line": 97,
+      "col": 13
+    },
+    {
+      "name": "index",
+      "kind": "variable",
+      "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\core\\indexer.ts",
+      "line": 104,
+      "col": 9
+    },
+    {
+      "name": "loadIndex",
+      "kind": "function",
+      "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\core\\indexer.ts",
+      "line": 111,
+      "col": 1
+    },
+    {
+      "name": "p",
+      "kind": "variable",
+      "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\core\\indexer.ts",
+      "line": 112,
+      "col": 9
+    },
+    {
+      "name": "searchIndex",
+      "kind": "function",
+      "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\core\\indexer.ts",
+      "line": 117,
+      "col": 1
+    },
+    {
+      "name": "idx",
+      "kind": "variable",
+      "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\core\\indexer.ts",
+      "line": 118,
+      "col": 9
+    },
+    {
+      "name": "q",
+      "kind": "variable",
+      "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\core\\indexer.ts",
+      "line": 119,
+      "col": 9
+    },
+    {
+      "name": "logEvent",
+      "kind": "function",
+      "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\core\\ledger.ts",
+      "line": 6,
+      "col": 1
+    },
+    {
+      "name": "line",
+      "kind": "variable",
+      "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\core\\ledger.ts",
+      "line": 7,
+      "col": 9
+    },
+    {
+      "name": "file",
+      "kind": "variable",
+      "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\core\\ledger.ts",
+      "line": 8,
+      "col": 9
+    },
+    {
+      "name": "tailLedger",
+      "kind": "function",
+      "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\core\\ledger.ts",
+      "line": 12,
+      "col": 1
+    },
+    {
+      "name": "file",
+      "kind": "variable",
+      "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\core\\ledger.ts",
+      "line": 13,
+      "col": 9
+    },
+    {
+      "name": "stream",
+      "kind": "variable",
+      "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\core\\ledger.ts",
+      "line": 15,
+      "col": 9
+    },
+    {
+      "name": "buf",
+      "kind": "variable",
+      "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\core\\ledger.ts",
+      "line": 16,
+      "col": 7
+    },
+    {
+      "name": "i",
+      "kind": "variable",
+      "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\core\\ledger.ts",
+      "line": 19,
+      "col": 9
+    },
+    {
+      "name": "line",
+      "kind": "variable",
+      "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\core\\ledger.ts",
+      "line": 21,
+      "col": 13
+    },
+    {
+      "name": "planFixBuild",
+      "kind": "function",
+      "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\core\\planner.ts",
+      "line": 18,
+      "col": 1
+    },
+    {
+      "name": "nodes",
+      "kind": "variable",
+      "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\core\\planner.ts",
+      "line": 19,
+      "col": 9
+    },
+    {
+      "name": "plan",
+      "kind": "variable",
+      "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\core\\planner.ts",
+      "line": 23,
+      "col": 9
+    },
+    {
+      "name": "planAddFeature",
+      "kind": "function",
+      "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\core\\planner.ts",
+      "line": 28,
+      "col": 1
+    },
+    {
+      "name": "text",
+      "kind": "variable",
+      "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\core\\planner.ts",
+      "line": 29,
+      "col": 9
+    },
+    {
+      "name": "content",
+      "kind": "variable",
+      "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\core\\planner.ts",
+      "line": 30,
+      "col": 9
+    },
+    {
+      "name": "nodes",
+      "kind": "variable",
+      "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\core\\planner.ts",
+      "line": 31,
+      "col": 9
+    },
+    {
+      "name": "plan",
+      "kind": "variable",
+      "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\core\\planner.ts",
+      "line": 35,
+      "col": 9
+    },
+    {
+      "name": "planClean",
+      "kind": "function",
+      "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\core\\planner.ts",
+      "line": 40,
+      "col": 1
+    },
+    {
+      "name": "nodes",
+      "kind": "variable",
+      "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\core\\planner.ts",
+      "line": 41,
+      "col": 9
+    },
+    {
+      "name": "plan",
+      "kind": "variable",
+      "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\core\\planner.ts",
+      "line": 44,
+      "col": 9
+    },
+    {
+      "name": "DEFAULT_PATTERNS",
+      "kind": "variable",
+      "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\core\\watchdog.ts",
+      "line": 3,
+      "col": 7
+    },
+    {
+      "name": "scanStagedDiff",
+      "kind": "function",
+      "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\core\\watchdog.ts",
+      "line": 11,
+      "col": 1
+    },
+    {
+      "name": "watchdogGate",
+      "kind": "function",
+      "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\core\\watchdog.ts",
+      "line": 16,
+      "col": 1
+    },
+    {
+      "name": "patch",
+      "kind": "variable",
+      "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\core\\watchdog.ts",
+      "line": 17,
+      "col": 9
+    },
+    {
+      "name": "issues",
+      "kind": "variable",
+      "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\core\\watchdog.ts",
+      "line": 18,
+      "col": 9
+    },
+    {
+      "name": "health",
+      "kind": "function",
+      "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\health.js",
+      "line": 1,
+      "col": 1
+    }
+  ],
+  "createdAt": "2025-08-11T00:16:57.275Z"
+}
