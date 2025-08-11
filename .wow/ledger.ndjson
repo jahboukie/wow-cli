@@ -50,3 +50,48 @@
 {"ts":"2025-08-11T00:30:02.474Z","kind":"info","data":{"msg":"write","file":"C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\ping.js"}}
 {"ts":"2025-08-11T00:30:02.478Z","kind":"info","data":{"msg":"testsynth.create","test":"C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\tests\\ping.test.mjs"}}
 {"ts":"2025-08-11T00:30:03.209Z","kind":"run","data":{"cmd":"node -e \"import('./src/health.js').then(m=>console.log(m.health()))\"","code":0,"ms":161}}
+{"ts":"2025-08-11T01:06:10.214Z","kind":"info","data":{"msg":"index.built","files":20,"symbols":144}}
+{"ts":"2025-08-11T01:06:10.215Z","kind":"info","data":{"msg":"planner.fix-build","nodes":2}}
+{"ts":"2025-08-11T01:06:10.375Z","kind":"git.branch","data":{"branch":"fix/1754874370294","kind":"fix-build"}}
+{"ts":"2025-08-11T01:06:11.174Z","kind":"run","data":{"cmd":"npm test || yarn test || pnpm test","code":0,"ms":798}}
+{"ts":"2025-08-11T01:06:11.176Z","kind":"info","data":{"msg":"Review test failures. Consider targeted patch then wow apply."}}
+{"ts":"2025-08-11T01:06:17.388Z","kind":"info","data":{"msg":"evaluator.summary","summary":{"build":{"code":0,"ms":5132},"test":{"code":0,"ms":968},"lint":{"code":0,"ms":0,"skipped":true},"score":30}}}
+{"ts":"2025-08-11T01:06:26.066Z","kind":"info","data":{"msg":"planner.add-feature","desc":"hello world feature","nodes":2}}
+{"ts":"2025-08-11T01:06:26.204Z","kind":"git.branch","data":{"branch":"feat/1754874386137","kind":"add-feature"}}
+{"ts":"2025-08-11T01:06:26.206Z","kind":"info","data":{"msg":"write","file":"C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\hello-world-feature.js"}}
+{"ts":"2025-08-11T01:06:26.211Z","kind":"info","data":{"msg":"testsynth.create","test":"C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\tests\\hello-world-feature.test.mjs"}}
+{"ts":"2025-08-11T01:06:26.912Z","kind":"run","data":{"cmd":"node -e \"import('./src/health.js').then(m=>console.log(m.health()))\"","code":0,"ms":103}}
+{"ts":"2025-08-11T01:06:31.926Z","kind":"info","data":{"msg":"evaluator.summary","summary":{"build":{"code":0,"ms":3637},"test":{"code":0,"ms":1166},"lint":{"code":0,"ms":0,"skipped":true},"score":30}}}
+{"ts":"2025-08-11T01:06:41.958Z","kind":"info","data":{"msg":"index.built","files":21,"symbols":145}}
+{"ts":"2025-08-11T01:06:41.959Z","kind":"info","data":{"msg":"planner.clean","nodes":1}}
+{"ts":"2025-08-11T01:06:42.156Z","kind":"git.branch","data":{"branch":"chore/1754874402073","kind":"clean"}}
+{"ts":"2025-08-11T01:06:47.241Z","kind":"error","data":{"cmd":"npm run lint --silent || npx eslint . --fix || true","code":1}}
+{"ts":"2025-08-11T01:06:51.939Z","kind":"info","data":{"msg":"evaluator.summary","summary":{"build":{"code":0,"ms":3433},"test":{"code":0,"ms":1099},"lint":{"code":0,"ms":0,"skipped":true},"score":30}}}
+{"ts":"2025-08-11T01:07:39.023Z","kind":"info","data":{"msg":"index.built","files":21,"symbols":145}}
+{"ts":"2025-08-11T01:07:39.024Z","kind":"info","data":{"msg":"planner.clean","nodes":1}}
+{"ts":"2025-08-11T01:07:39.425Z","kind":"git.branch","data":{"branch":"chore/1754874459227","kind":"clean"}}
+{"ts":"2025-08-11T01:07:46.869Z","kind":"run","data":{"cmd":"node -e \"const cp=require('child_process');const run=c=>{try{cp.execSync(c,{stdio:'inherit'})}catch(e){return false}return true};if(!run('npm run -s lint')){run('npx -y eslint . --fix')}\"","code":0,"ms":7443}}
+{"ts":"2025-08-11T01:07:55.046Z","kind":"info","data":{"msg":"evaluator.summary","summary":{"build":{"code":0,"ms":7088},"test":{"code":0,"ms":937},"lint":{"code":0,"ms":0,"skipped":true},"score":30}}}
+{"ts":"2025-08-11T01:08:31.904Z","kind":"info","data":{"msg":"index.built","files":21,"symbols":145}}
+{"ts":"2025-08-11T01:08:31.906Z","kind":"info","data":{"msg":"planner.clean","nodes":1}}
+{"ts":"2025-08-11T01:08:32.303Z","kind":"git.branch","data":{"branch":"chore/1754874512112","kind":"clean"}}
+{"ts":"2025-08-11T01:08:34.139Z","kind":"run","data":{"cmd":"node -e \"const cp=require('child_process'),fs=require('fs');const run=c=>{try{cp.execSync(c,{stdio:'inherit'})}catch(e){return false}return true};const hasCfg=['eslint.config.js','eslint.config.cjs','eslint.config.mjs','.eslintrc','.eslintrc.js','.eslintrc.cjs','.eslintrc.mjs','.eslintrc.json'].some(f=>fs.existsSync(f));if(!run('npm run -s lint') && hasCfg){run('npx -y eslint . --fix')}\"","code":0,"ms":1834}}
+{"ts":"2025-08-11T01:08:39.802Z","kind":"info","data":{"msg":"evaluator.summary","summary":{"build":{"code":0,"ms":4579},"test":{"code":0,"ms":967},"lint":{"code":0,"ms":0,"skipped":true},"score":30}}}
+{"ts":"2025-08-11T01:13:46.036Z","kind":"info","data":{"msg":"index.built","files":22,"symbols":145}}
+{"ts":"2025-08-11T01:13:46.038Z","kind":"info","data":{"msg":"planner.fix-build","nodes":2}}
+{"ts":"2025-08-11T01:13:46.250Z","kind":"git.branch","data":{"branch":"fix/1754874826145","kind":"fix-build"}}
+{"ts":"2025-08-11T01:13:47.228Z","kind":"run","data":{"cmd":"npm test || yarn test || pnpm test","code":0,"ms":977}}
+{"ts":"2025-08-11T01:13:47.229Z","kind":"info","data":{"msg":"Review test failures. Consider targeted patch then wow apply."}}
+{"ts":"2025-08-11T01:14:04.054Z","kind":"info","data":{"msg":"evaluator.summary","summary":{"build":{"code":0,"ms":6538},"test":{"code":0,"ms":2429},"lint":{"code":1,"ms":7728},"score":25}}}
+{"ts":"2025-08-11T01:14:42.444Z","kind":"info","data":{"msg":"index.built","files":22,"symbols":145}}
+{"ts":"2025-08-11T01:14:42.450Z","kind":"info","data":{"msg":"planner.fix-build","nodes":2}}
+{"ts":"2025-08-11T01:14:42.907Z","kind":"git.branch","data":{"branch":"fix/1754874882677","kind":"fix-build"}}
+{"ts":"2025-08-11T01:14:44.606Z","kind":"run","data":{"cmd":"npm test || yarn test || pnpm test","code":0,"ms":1695}}
+{"ts":"2025-08-11T01:14:44.607Z","kind":"info","data":{"msg":"Review test failures. Consider targeted patch then wow apply."}}
+{"ts":"2025-08-11T01:14:55.249Z","kind":"info","data":{"msg":"evaluator.summary","summary":{"build":{"code":0,"ms":3777},"test":{"code":0,"ms":1152},"lint":{"code":1,"ms":5579},"score":25}}}
+{"ts":"2025-08-11T01:15:32.450Z","kind":"info","data":{"msg":"index.built","files":22,"symbols":147}}
+{"ts":"2025-08-11T01:15:32.453Z","kind":"info","data":{"msg":"planner.fix-build","nodes":2}}
+{"ts":"2025-08-11T01:15:32.777Z","kind":"git.branch","data":{"branch":"fix/1754874932607","kind":"fix-build"}}
+{"ts":"2025-08-11T01:15:34.341Z","kind":"run","data":{"cmd":"npm test || yarn test || pnpm test","code":0,"ms":1562}}
+{"ts":"2025-08-11T01:15:34.345Z","kind":"info","data":{"msg":"Review test failures. Consider targeted patch then wow apply."}}
+{"ts":"2025-08-11T01:15:41.351Z","kind":"info","data":{"msg":"evaluator.summary","summary":{"build":{"code":0,"ms":5047},"test":{"code":0,"ms":1092},"lint":{"code":1,"ms":759},"score":25}}}

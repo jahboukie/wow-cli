@@ -55,17 +55,23 @@ program
 program
   .command('fix-build')
   .description('Plan and run a basic fix-build routine')
-  .action(fixBuildCommand);
+  .option('--json', 'JSON output')
+  .option('--min-score <n>', 'Minimum evaluator score required', (v) => parseInt(v, 10))
+  .action((opts: any) => fixBuildCommand(opts));
 
 program
   .command('add-feature')
   .description('Scaffold a small feature')
   .argument('[description...]', 'Short feature description')
-  .action((desc: string[]) => addFeatureCommand((desc || []).join(' ').trim()));
+  .option('--json', 'JSON output')
+  .option('--min-score <n>', 'Minimum evaluator score required', (v) => parseInt(v, 10))
+  .action((desc: string[], opts: any) => addFeatureCommand((desc || []).join(' ').trim(), opts));
 
 program
   .command('clean')
   .description('Run a cleanup/linting routine')
-  .action(cleanCommand);
+  .option('--json', 'JSON output')
+  .option('--min-score <n>', 'Minimum evaluator score required', (v) => parseInt(v, 10))
+  .action((opts: any) => cleanCommand(opts));
 
 program.parseAsync(process.argv);
