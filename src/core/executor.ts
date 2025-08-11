@@ -4,6 +4,7 @@ import { execa } from 'execa';
 import { Plan } from './planner.js';
 import { logEvent } from './ledger.js';
 import { newBranch, stageAll, commitAll } from './git.js';
+import { synthTestForJsModule } from './testsynth.js';
 
 export async function execute(plan: Plan, opts: { branchPrefix?: string } = {}) {
   const branch = await newBranch(opts.branchPrefix || plan.kind);
@@ -26,6 +27,12 @@ export async function execute(plan: Plan, opts: { branchPrefix?: string } = {}) 
       await fs.ensureDir(path.dirname(file));
       await fs.writeFile(file, node.data?.content ?? '', 'utf-8');
       await logEvent('info', { msg: 'write', file });
+      // synthesize a basic test for JS/TS modules
+      if (file.endsWith('.js')) {
+        const rel = path.relative(process.cwd(), file).replace(/\\/g, '/');
+        const created = await synthTestForJsModule(rel);
+        if (created) await logEvent('info', { msg: 'testsynth.create', test: created });
+      }
       await stageAll();
       await commitAll(node.data?.message || 'update files');
     } else if (node.action === 'apply_patch') {

@@ -28,8 +28,10 @@ export async function planFixBuild(): Promise<Plan> {
 export async function planAddFeature(desc: string): Promise<Plan> {
   const text = (desc || 'health check').trim();
   const content = `export function health() { return { status: 'ok', ts: new Date().toISOString() }; }\n`;
+  const kebab = text.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '') || 'feature';
+  const targetFile = `src/${kebab}.js`;
   const nodes: PlanNode[] = [
-    { id: 'n1', action: 'write', data: { file: 'src/health.js', content, message: `feat: add ${text}` }, criteria: ['file created'] },
+    { id: 'n1', action: 'write', data: { file: targetFile, content, message: `feat: add ${text}` }, criteria: ['file created'] },
     { id: 'n2', action: 'run', data: { cmd: "node -e \"import('./src/health.js').then(m=>console.log(m.health()))\"" }, criteria: ['script runs'] },
   ];
   const plan: Plan = { kind: 'add-feature', nodes, acceptance: ['feature scaffolded and runnable'] };
