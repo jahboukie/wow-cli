@@ -8,10 +8,10 @@ export type EvalMetrics = {
   score: number;
 };
 
-async function run(cmd: string) {
+async function run(cmd: string, cwd?: string) {
   const started = Date.now();
   try {
-    const res = await execa(cmd, { shell: true });
+  const res = await execa(cmd, { shell: true, cwd });
     return { code: res.exitCode ?? 0, ms: Date.now() - started };
   } catch (err: any) {
     return { code: err?.exitCode ?? 1, ms: Date.now() - started };
@@ -30,26 +30,28 @@ function computeScore(m: { build: number; test: number; lint?: number; lintSkipp
   return score;
 }
 
-export async function evaluateProject(): Promise<EvalMetrics> {
+export async function evaluateProject(cwd?: string): Promise<EvalMetrics> {
   // Always try build + test
-  const build = await run('npm run -s build');
-  const test = await run('npm -s test');
+  const build = await run('npm run -s build', cwd);
+  const test = await run('npm -s test', cwd);
 
   // Lint only if a config exists
   let lint: EvalMetrics['lint'] | undefined = undefined;
   // Prefer npm script if present
   const lintScriptExists = await run(
     "node -e \"const fs=require('fs');let s={};try{s=JSON.parse(fs.readFileSync('package.json','utf8')).scripts||{}}catch(e){};process.exit(s.lint?0:2)\"",
+    cwd,
   );
   if (lintScriptExists.code === 0) {
-    const l = await run('npm run -s lint');
+    const l = await run('npm run -s lint', cwd);
     lint = { code: l.code, ms: l.ms };
   } else {
     const configExists = await run(
       "node -e \"const fs=require('fs');const names=['eslint.config.js','eslint.config.cjs','eslint.config.mjs','.eslintrc','.eslintrc.js','.eslintrc.cjs','.eslintrc.mjs','.eslintrc.json'];process.exit(names.some(f=>fs.existsSync(f))?0:2)\"",
+      cwd,
     );
     if (configExists.code === 0) {
-      const l = await run('npx -y eslint .');
+      const l = await run('npx -y eslint .', cwd);
       lint = { code: l.code, ms: l.ms };
     } else {
       lint = { code: 0, ms: 0, skipped: true };
@@ -60,4 +62,11 @@ export async function evaluateProject(): Promise<EvalMetrics> {
   const summary = { build, test, lint, score } as EvalMetrics;
   await logEvent('info', { msg: 'evaluator.summary', summary });
   return summary;
+}
+
+export function computeConfidence(metrics: EvalMetrics): number {
+  const max = metrics.lint && !metrics.lint.skipped ? 35 : 30;
+  const numer = Math.max(0, metrics.score);
+  const conf = Math.round(Math.min(100, (numer / max) * 100));
+  return conf;
 }
