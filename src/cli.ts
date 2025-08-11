@@ -9,6 +9,7 @@ import { searchCommand } from './commands/search.js';
 import { fixBuildCommand } from './commands/fixBuild.js';
 import { addFeatureCommand } from './commands/addFeature.js';
 import { cleanCommand } from './commands/clean.js';
+import { evalCommand } from './commands/eval.js';
 
 const program = new Command();
 program.name('wow').description('AI-native coding toolbox (MVP)').version('0.1.0');
@@ -73,5 +74,12 @@ program
   .option('--json', 'JSON output')
   .option('--min-score <n>', 'Minimum evaluator score required', (v) => parseInt(v, 10))
   .action((opts: any) => cleanCommand(opts));
+
+program
+  .command('eval')
+  .description('Run the evaluator only')
+  .option('--json', 'JSON output')
+  .option('--min-score <n>', 'Minimum evaluator score required', (v) => parseInt(v, 10))
+  .action((opts: any) => evalCommand(opts));
 
 program.parseAsync(process.argv);

@@ -12,6 +12,7 @@ Commands
  - wow fix-build [--json] [--min-score N] — run plan, execute, evaluate; optionally JSON and fail if score < N
  - wow add-feature [description...] [--json] [--min-score N] — scaffold tiny feature and evaluate
  - wow clean [--json] [--min-score N] — run cleanup/lint routine and evaluate
+ - wow eval [--json] [--min-score N] — run evaluator only (useful in CI)
 
 Design
 - AI-native: stable JSON I/O, idempotent ops, atomic git patches

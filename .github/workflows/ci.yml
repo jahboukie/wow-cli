@@ -25,4 +25,4 @@ jobs:
       - name: Test
         run: npm test
       - name: Evaluator threshold
-        run: node dist/cli.js fix-build --min-score 0 --json
+        run: node dist/cli.js eval --min-score 0 --json
