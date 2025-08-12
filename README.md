@@ -69,6 +69,16 @@ Evaluator
 - Threshold: use `--min-score` on fix-build/add-feature/clean to set process exit code to 1 when below target (useful in CI)
  - Confidence: simulation commands compute a 0–100 confidence from evaluator score without modifying your working copy
  - Scoring model (MVP): build pass +15, test pass +30, lint pass +10 (lint fail is neutral initially; missing scripts/tools are skipped). Max = 55 (reported as maxScore). After 3 consecutive lint failures an adaptive gentle penalty (-5) is applied until lint passes (counter resets on success).
+ - Adaptive lint penalty is configurable in `.wow/policy.json` via a `lintPenalty` block (optional):
+	 ```jsonc
+	 {
+		 "lintPenalty": { "threshold": 3, "points": 5 }
+	 }
+	 ```
+	 Fields:
+	 - threshold: consecutive failing lint evaluations before applying the penalty (default 3)
+	 - points: score points subtracted once threshold reached (default 5)
+	 Penalty is removed (counter resets) after a successful lint pass.
  - Confidence = (score / 55)*100 capped at 100. Default policy minConfidence: 50 (tunable in `.wow/policy.json`).
  - Guidance: `verify`, `simulate-*`, and narrative modes emit `advice[]` + `nextStep` (JSON) or a short “Advice/Next:” section / story text (with --story) to coach non-experts.
 

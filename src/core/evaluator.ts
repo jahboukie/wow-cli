@@ -3,6 +3,7 @@ import { logEvent } from './ledger.js';
 import fs from 'fs-extra';
 import path from 'path';
 import { loadState, saveState } from './state.js';
+import { loadPolicy } from './policy.js';
 
 export type EvalMetrics = {
   build: { code: number; ms: number; skipped?: boolean };
@@ -10,6 +11,9 @@ export type EvalMetrics = {
   lint?: { code: number; ms: number; skipped?: boolean };
   score: number;
   maxScore: number;
+  originalScore?: number; // before adaptive penalties
+  penaltyApplied?: boolean;
+  penaltyPoints?: number;
 };
 
 async function run(cmd: string, cwd?: string) {
@@ -96,19 +100,27 @@ export async function evaluateProject(cwd?: string): Promise<EvalMetrics> {
 
   const maxScore = 55; // 15+30+10
   let score = computeScore({ build: build.code, buildSkipped: build.skipped, test: test.code, testSkipped: test.skipped, lint: lint?.code, lintSkipped: lint?.skipped });
-  // Adaptive lint penalty: after 3 consecutive lint failures, apply -5 once until a pass resets counter
+  const originalScore = score;
+  // Load policy for configurable adaptive lint penalty
+  const policy = await loadPolicy(cwd || process.cwd());
+  const penaltyCfg: any = (policy as any).lintPenalty || {};
+  const threshold = typeof penaltyCfg.threshold === 'number' ? penaltyCfg.threshold : 3;
+  const penaltyPoints = typeof penaltyCfg.points === 'number' ? penaltyCfg.points : 5;
+  // Adaptive lint penalty: after N consecutive lint failures, apply -penaltyPoints once until a pass resets counter
   const state = await loadState(cwd || process.cwd());
   let lintFailCount = state.lintFailCount || 0;
+  let penaltyApplied = false;
   if (lint && !lint.skipped && lint.code !== 0) {
     lintFailCount += 1;
-    if (lintFailCount >= 3) {
-      score -= 5; // gentle nudge
+    if (lintFailCount >= threshold) {
+      score -= penaltyPoints; // gentle nudge
+      penaltyApplied = true;
     }
   } else if (lint && (!lint.skipped && lint.code === 0)) {
     lintFailCount = 0; // reset on pass
   }
   await saveState({ lintFailCount }, cwd || process.cwd());
-  const summary = { build, test, lint, score, maxScore } as EvalMetrics;
+  const summary = { build, test, lint, score, maxScore, originalScore, penaltyApplied, penaltyPoints: penaltyApplied ? penaltyPoints : 0 } as EvalMetrics;
   await logEvent('info', { msg: 'evaluator.summary', summary });
   return summary;
 }

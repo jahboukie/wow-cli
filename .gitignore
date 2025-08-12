@@ -7,6 +7,7 @@ dist/
 # internal agent repo and temp patches
 .wow/git/
 .wow/tmp-*.diff
+.wow/state.json
 
 # misc
 .DS_Store
