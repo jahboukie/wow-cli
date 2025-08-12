@@ -1,0 +1,10 @@
+{
+  "simulateFirst": true,
+  "minConfidence": 90,
+  "minScore": 25,
+  "commands": {
+    "fix-build": { "simulateFirst": true },
+    "add-feature": { "simulateFirst": true },
+    "clean": { "simulateFirst": true }
+  }
+}

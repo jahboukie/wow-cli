@@ -6,7 +6,7 @@ import { logEvent } from './ledger.js';
 import { newBranch, stageAll, commitAll } from './git.js';
 import { synthTestForJsModule } from './testsynth.js';
 
-export async function execute(plan: Plan, opts: { branchPrefix?: string } = {}) {
+export async function execute(plan: Plan, opts: { branchPrefix?: string; muteRunOutput?: boolean } = {}) {
   const branch = await newBranch(opts.branchPrefix || plan.kind);
   await logEvent('git.branch', { branch, kind: plan.kind });
 
@@ -15,7 +15,7 @@ export async function execute(plan: Plan, opts: { branchPrefix?: string } = {}) 
       const cmd = node.data?.cmd as string;
       const start = Date.now();
       try {
-        const child = execa(cmd, { shell: true, stdout: 'inherit', stderr: 'inherit' });
+        const child = execa(cmd, { shell: true, stdout: opts.muteRunOutput ? 'pipe' : 'inherit', stderr: opts.muteRunOutput ? 'pipe' : 'inherit' });
         const res = await child;
         await logEvent('run', { cmd, code: res.exitCode ?? 0, ms: Date.now() - start });
       } catch (err: any) {

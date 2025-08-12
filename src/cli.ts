@@ -68,8 +68,11 @@ program
   .command('simulate-fix-build')
   .description('Simulate fix-build plan in a temp workspace and report confidence')
   .option('--json', 'JSON output')
+  .option('--preview', 'Show file change summary in simulation')
+  .option('--patch', 'Include unified diff patch in output (may be large)')
+  .option('--summary-only', 'Print only change summary/patch, skip evaluator/confidence')
   .option('--min-confidence <n>', 'Minimum confidence required', (v) => parseInt(v, 10))
-  .action((opts: any) => simulatePlanCommand('fix-build', { json: opts.json, minConfidence: opts.minConfidence }));
+  .action((opts: any) => simulatePlanCommand('fix-build', { json: opts.json, minConfidence: opts.minConfidence, preview: opts.preview, patch: opts.patch, summaryOnly: opts.summaryOnly }));
 
 program
   .command('add-feature')
@@ -84,8 +87,11 @@ program
   .description('Simulate add-feature plan in a temp workspace and report confidence')
   .argument('[description...]', 'Short feature description')
   .option('--json', 'JSON output')
+  .option('--preview', 'Show file change summary in simulation')
+  .option('--patch', 'Include unified diff patch in output (may be large)')
+  .option('--summary-only', 'Print only change summary/patch, skip evaluator/confidence')
   .option('--min-confidence <n>', 'Minimum confidence required', (v) => parseInt(v, 10))
-  .action((desc: string[], opts: any) => simulatePlanCommand('add-feature', { desc: (desc||[]).join(' ').trim(), json: opts.json, minConfidence: opts.minConfidence }));
+  .action((desc: string[], opts: any) => simulatePlanCommand('add-feature', { desc: (desc||[]).join(' ').trim(), json: opts.json, minConfidence: opts.minConfidence, preview: opts.preview, patch: opts.patch, summaryOnly: opts.summaryOnly }));
 
 program
   .command('clean')
@@ -98,8 +104,11 @@ program
   .command('simulate-clean')
   .description('Simulate clean plan in a temp workspace and report confidence')
   .option('--json', 'JSON output')
+  .option('--preview', 'Show file change summary in simulation')
+  .option('--patch', 'Include unified diff patch in output (may be large)')
+  .option('--summary-only', 'Print only change summary/patch, skip evaluator/confidence')
   .option('--min-confidence <n>', 'Minimum confidence required', (v) => parseInt(v, 10))
-  .action((opts: any) => simulatePlanCommand('clean', { json: opts.json, minConfidence: opts.minConfidence }));
+  .action((opts: any) => simulatePlanCommand('clean', { json: opts.json, minConfidence: opts.minConfidence, preview: opts.preview, patch: opts.patch, summaryOnly: opts.summaryOnly }));
 
 program
   .command('eval')

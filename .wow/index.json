@@ -1,32 +1,53 @@
 {
-  "files": 22,
+  "files": 27,
   "symbols": [
     {
       "name": "program",
       "kind": "variable",
       "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\cli.ts",
-      "line": 13,
+      "line": 16,
       "col": 7
     },
     {
       "name": "addFeatureCommand",
       "kind": "function",
       "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\commands\\addFeature.ts",
-      "line": 5,
+      "line": 7,
       "col": 1
+    },
+    {
+      "name": "policy",
+      "kind": "variable",
+      "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\commands\\addFeature.ts",
+      "line": 8,
+      "col": 9
+    },
+    {
+      "name": "p",
+      "kind": "variable",
+      "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\commands\\addFeature.ts",
+      "line": 9,
+      "col": 9
+    },
+    {
+      "name": "minConfidence",
+      "kind": "variable",
+      "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\commands\\addFeature.ts",
+      "line": 10,
+      "col": 9
     },
     {
       "name": "plan",
       "kind": "variable",
       "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\commands\\addFeature.ts",
-      "line": 6,
+      "line": 15,
       "col": 9
     },
     {
       "name": "evalSummary",
       "kind": "variable",
       "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\commands\\addFeature.ts",
-      "line": 8,
+      "line": 17,
       "col": 9
     },
     {
@@ -82,42 +103,98 @@
       "name": "cleanCommand",
       "kind": "function",
       "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\commands\\clean.ts",
-      "line": 6,
+      "line": 8,
       "col": 1
+    },
+    {
+      "name": "policy",
+      "kind": "variable",
+      "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\commands\\clean.ts",
+      "line": 9,
+      "col": 9
+    },
+    {
+      "name": "p",
+      "kind": "variable",
+      "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\commands\\clean.ts",
+      "line": 10,
+      "col": 9
+    },
+    {
+      "name": "minConfidence",
+      "kind": "variable",
+      "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\commands\\clean.ts",
+      "line": 11,
+      "col": 9
     },
     {
       "name": "plan",
       "kind": "variable",
       "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\commands\\clean.ts",
-      "line": 8,
+      "line": 17,
       "col": 9
     },
     {
       "name": "evalSummary",
       "kind": "variable",
       "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\commands\\clean.ts",
-      "line": 10,
+      "line": 19,
+      "col": 9
+    },
+    {
+      "name": "evalCommand",
+      "kind": "function",
+      "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\commands\\eval.ts",
+      "line": 3,
+      "col": 1
+    },
+    {
+      "name": "evalSummary",
+      "kind": "variable",
+      "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\commands\\eval.ts",
+      "line": 4,
       "col": 9
     },
     {
       "name": "fixBuildCommand",
       "kind": "function",
       "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\commands\\fixBuild.ts",
-      "line": 6,
+      "line": 8,
       "col": 1
+    },
+    {
+      "name": "policy",
+      "kind": "variable",
+      "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\commands\\fixBuild.ts",
+      "line": 10,
+      "col": 9
+    },
+    {
+      "name": "p",
+      "kind": "variable",
+      "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\commands\\fixBuild.ts",
+      "line": 11,
+      "col": 9
+    },
+    {
+      "name": "minConfidence",
+      "kind": "variable",
+      "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\commands\\fixBuild.ts",
+      "line": 12,
+      "col": 9
     },
     {
       "name": "plan",
       "kind": "variable",
       "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\commands\\fixBuild.ts",
-      "line": 8,
+      "line": 18,
       "col": 9
     },
     {
       "name": "evalSummary",
       "kind": "variable",
       "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\commands\\fixBuild.ts",
-      "line": 10,
+      "line": 20,
       "col": 9
     },
     {
@@ -180,42 +257,105 @@
       "name": "runCommand",
       "kind": "function",
       "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\commands\\run.ts",
-      "line": 4,
+      "line": 5,
       "col": 1
     },
     {
       "name": "started",
       "kind": "variable",
       "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\commands\\run.ts",
-      "line": 5,
+      "line": 6,
+      "col": 9
+    },
+    {
+      "name": "code",
+      "kind": "variable",
+      "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\commands\\run.ts",
+      "line": 8,
+      "col": 9
+    },
+    {
+      "name": "parts",
+      "kind": "variable",
+      "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\commands\\run.ts",
+      "line": 10,
+      "col": 9
+    },
+    {
+      "name": "r",
+      "kind": "variable",
+      "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\commands\\run.ts",
+      "line": 12,
+      "col": 13
+    },
+    {
+      "name": "commandStr",
+      "kind": "variable",
+      "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\commands\\run.ts",
+      "line": 17,
       "col": 9
     },
     {
       "name": "child",
       "kind": "variable",
       "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\commands\\run.ts",
-      "line": 7,
-      "col": 11
+      "line": 18,
+      "col": 9
     },
     {
       "name": "res",
       "kind": "variable",
       "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\commands\\run.ts",
-      "line": 8,
+      "line": 19,
+      "col": 13
+    },
+    {
+      "name": "payload",
+      "kind": "variable",
+      "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\commands\\run.ts",
+      "line": 22,
       "col": 11
     },
     {
       "name": "payload",
       "kind": "variable",
       "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\commands\\run.ts",
-      "line": 9,
+      "line": 28,
       "col": 11
     },
     {
-      "name": "payload",
+      "name": "splitArgs",
+      "kind": "function",
+      "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\commands\\run.ts",
+      "line": 36,
+      "col": 1
+    },
+    {
+      "name": "out",
       "kind": "variable",
       "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\commands\\run.ts",
-      "line": 15,
+      "line": 37,
+      "col": 9
+    },
+    {
+      "name": "cur",
+      "kind": "variable",
+      "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\commands\\run.ts",
+      "line": 38,
+      "col": 7
+    },
+    {
+      "name": "quote",
+      "kind": "variable",
+      "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\commands\\run.ts",
+      "line": 39,
+      "col": 7
+    },
+    {
+      "name": "ch",
+      "kind": "variable",
+      "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\commands\\run.ts",
+      "line": 41,
       "col": 11
     },
     {
@@ -240,6 +380,90 @@
       "col": 9
     },
     {
+      "name": "simulateCommand",
+      "kind": "function",
+      "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\commands\\simulate.ts",
+      "line": 4,
+      "col": 1
+    },
+    {
+      "name": "abs",
+      "kind": "variable",
+      "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\commands\\simulate.ts",
+      "line": 5,
+      "col": 9
+    },
+    {
+      "name": "res",
+      "kind": "variable",
+      "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\commands\\simulate.ts",
+      "line": 6,
+      "col": 9
+    },
+    {
+      "name": "simulatePlanCommand",
+      "kind": "function",
+      "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\commands\\simulatePlan.ts",
+      "line": 8,
+      "col": 1
+    },
+    {
+      "name": "tmp",
+      "kind": "variable",
+      "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\commands\\simulatePlan.ts",
+      "line": 9,
+      "col": 9
+    },
+    {
+      "name": "toCopy",
+      "kind": "variable",
+      "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\commands\\simulatePlan.ts",
+      "line": 10,
+      "col": 9
+    },
+    {
+      "name": "p",
+      "kind": "variable",
+      "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\commands\\simulatePlan.ts",
+      "line": 12,
+      "col": 11
+    },
+    {
+      "name": "plan",
+      "kind": "variable",
+      "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\commands\\simulatePlan.ts",
+      "line": 16,
+      "col": 9
+    },
+    {
+      "name": "oldCwd",
+      "kind": "variable",
+      "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\commands\\simulatePlan.ts",
+      "line": 17,
+      "col": 9
+    },
+    {
+      "name": "metrics",
+      "kind": "variable",
+      "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\commands\\simulatePlan.ts",
+      "line": 21,
+      "col": 11
+    },
+    {
+      "name": "confidence",
+      "kind": "variable",
+      "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\commands\\simulatePlan.ts",
+      "line": 22,
+      "col": 11
+    },
+    {
+      "name": "out",
+      "kind": "variable",
+      "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\commands\\simulatePlan.ts",
+      "line": 23,
+      "col": 11
+    },
+    {
       "name": "run",
       "kind": "function",
       "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\core\\evaluator.ts",
@@ -258,7 +482,7 @@
       "kind": "variable",
       "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\core\\evaluator.ts",
       "line": 14,
-      "col": 11
+      "col": 9
     },
     {
       "name": "computeScore",
@@ -313,35 +537,63 @@
       "name": "l",
       "kind": "variable",
       "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\core\\evaluator.ts",
-      "line": 45,
+      "line": 46,
       "col": 11
     },
     {
       "name": "configExists",
       "kind": "variable",
       "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\core\\evaluator.ts",
-      "line": 48,
+      "line": 49,
       "col": 11
     },
     {
       "name": "l",
       "kind": "variable",
       "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\core\\evaluator.ts",
-      "line": 52,
+      "line": 54,
       "col": 13
     },
     {
       "name": "score",
       "kind": "variable",
       "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\core\\evaluator.ts",
-      "line": 59,
+      "line": 61,
       "col": 9
     },
     {
       "name": "summary",
       "kind": "variable",
       "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\core\\evaluator.ts",
-      "line": 60,
+      "line": 62,
+      "col": 9
+    },
+    {
+      "name": "computeConfidence",
+      "kind": "function",
+      "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\core\\evaluator.ts",
+      "line": 67,
+      "col": 1
+    },
+    {
+      "name": "max",
+      "kind": "variable",
+      "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\core\\evaluator.ts",
+      "line": 68,
+      "col": 9
+    },
+    {
+      "name": "numer",
+      "kind": "variable",
+      "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\core\\evaluator.ts",
+      "line": 69,
+      "col": 9
+    },
+    {
+      "name": "conf",
+      "kind": "variable",
+      "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\core\\evaluator.ts",
+      "line": 70,
       "col": 9
     },
     {
@@ -863,6 +1115,181 @@
       "col": 9
     },
     {
+      "name": "loadPolicy",
+      "kind": "function",
+      "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\core\\policy.ts",
+      "line": 11,
+      "col": 1
+    },
+    {
+      "name": "p",
+      "kind": "variable",
+      "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\core\\policy.ts",
+      "line": 12,
+      "col": 9
+    },
+    {
+      "name": "data",
+      "kind": "variable",
+      "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\core\\policy.ts",
+      "line": 15,
+      "col": 11
+    },
+    {
+      "name": "resolveCommandPolicy",
+      "kind": "function",
+      "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\core\\policy.ts",
+      "line": 22,
+      "col": 1
+    },
+    {
+      "name": "base",
+      "kind": "variable",
+      "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\core\\policy.ts",
+      "line": 23,
+      "col": 9
+    },
+    {
+      "name": "cmd",
+      "kind": "variable",
+      "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\core\\policy.ts",
+      "line": 24,
+      "col": 9
+    },
+    {
+      "name": "runJsSandbox",
+      "kind": "function",
+      "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\core\\sandbox.ts",
+      "line": 12,
+      "col": 1
+    },
+    {
+      "name": "timeout",
+      "kind": "variable",
+      "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\core\\sandbox.ts",
+      "line": 13,
+      "col": 9
+    },
+    {
+      "name": "workerPath",
+      "kind": "variable",
+      "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\core\\sandbox.ts",
+      "line": 14,
+      "col": 9
+    },
+    {
+      "name": "workerCode",
+      "kind": "variable",
+      "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\core\\sandbox.ts",
+      "line": 15,
+      "col": 9
+    },
+    {
+      "name": "res",
+      "kind": "variable",
+      "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\core\\sandbox.ts",
+      "line": 34,
+      "col": 11
+    },
+    {
+      "name": "w",
+      "kind": "variable",
+      "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\core\\sandbox.ts",
+      "line": 35,
+      "col": 13
+    },
+    {
+      "name": "t",
+      "kind": "variable",
+      "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\core\\sandbox.ts",
+      "line": 36,
+      "col": 13
+    },
+    {
+      "name": "pathToFileUrl",
+      "kind": "function",
+      "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\core\\sandbox.ts",
+      "line": 47,
+      "col": 1
+    },
+    {
+      "name": "resolved",
+      "kind": "variable",
+      "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\core\\sandbox.ts",
+      "line": 48,
+      "col": 7
+    },
+    {
+      "name": "runProcessSandbox",
+      "kind": "function",
+      "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\core\\sandbox.ts",
+      "line": 62,
+      "col": 1
+    },
+    {
+      "name": "timeout",
+      "kind": "variable",
+      "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\core\\sandbox.ts",
+      "line": 63,
+      "col": 9
+    },
+    {
+      "name": "base",
+      "kind": "variable",
+      "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\core\\sandbox.ts",
+      "line": 64,
+      "col": 9
+    },
+    {
+      "name": "allow",
+      "kind": "variable",
+      "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\core\\sandbox.ts",
+      "line": 65,
+      "col": 9
+    },
+    {
+      "name": "runCwd",
+      "kind": "variable",
+      "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\core\\sandbox.ts",
+      "line": 69,
+      "col": 7
+    },
+    {
+      "name": "tmp",
+      "kind": "variable",
+      "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\core\\sandbox.ts",
+      "line": 71,
+      "col": 11
+    },
+    {
+      "name": "toCopy",
+      "kind": "variable",
+      "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\core\\sandbox.ts",
+      "line": 72,
+      "col": 11
+    },
+    {
+      "name": "srcPath",
+      "kind": "variable",
+      "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\core\\sandbox.ts",
+      "line": 74,
+      "col": 13
+    },
+    {
+      "name": "dest",
+      "kind": "variable",
+      "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\core\\sandbox.ts",
+      "line": 76,
+      "col": 15
+    },
+    {
+      "name": "child",
+      "kind": "variable",
+      "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\core\\sandbox.ts",
+      "line": 83,
+      "col": 11
+    },
+    {
       "name": "guessExportNames",
       "kind": "function",
       "file": "C:\\Users\\scorp\\dev\\super-coding-tools\\wow\\src\\core\\testsynth.ts",
@@ -1031,5 +1458,5 @@
       "col": 1
     }
   ],
-  "createdAt": "2025-08-11T01:15:32.440Z"
+  "createdAt": "2025-08-11T04:10:50.113Z"
 }

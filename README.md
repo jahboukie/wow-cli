@@ -10,14 +10,32 @@ Commands
 - wow ledger [--tail] — print or stream ledger.ndjson
  - wow index [--json] — build a local symbol index
  - wow search <query> [--json] — search the index
- - wow fix-build [--json] [--min-score N] — run plan, execute, evaluate; optionally JSON and fail if score < N
- - wow add-feature [description...] [--json] [--min-score N] — scaffold tiny feature and evaluate
- - wow clean [--json] [--min-score N] — run cleanup/lint routine and evaluate
- - wow eval [--json] [--min-score N] — run evaluator only (useful in CI)
+ - wow fix-build [--json] [--min-score N] — run plan, execute, evaluate; optionally JSON and fail if score < N (or policy default)
+ - wow add-feature [description...] [--json] [--min-score N] — scaffold tiny feature and evaluate (honors policy default)
+ - wow clean [--json] [--min-score N] — run cleanup/lint routine and evaluate (honors policy default)
+ - wow eval [--json] [--min-score N] — run evaluator only (useful in CI; honors policy default)
  - wow simulate <file> [--timeout ms] [--json] — run a JS module exporting async main() in a restricted VM
- - wow simulate-fix-build [--json] [--min-confidence N] — simulate fix-build plan in a temp copy and report confidence before touching real files
- - wow simulate-add-feature [description...] [--json] [--min-confidence N] — simulate add-feature plan in a temp copy and report confidence
- - wow simulate-clean [--json] [--min-confidence N] — simulate clean plan in a temp copy and report confidence
+ - wow simulate-fix-build [--json] [--min-confidence N] [--preview] [--patch] [--summary-only] — simulate fix-build in a temp copy; show change summary/diff or confidence metrics
+ - wow simulate-add-feature [description...] [--json] [--min-confidence N] [--preview] [--patch] [--summary-only] — simulate add-feature; show change summary/diff or confidence metrics
+ - wow simulate-clean [--json] [--min-confidence N] [--preview] [--patch] [--summary-only] — simulate clean; show change summary/diff or confidence metrics
+
+Policy (.wow/policy.json)
+- Controls defaults for simulate-first and thresholds.
+- Example:
+
+	{
+		"simulateFirst": true,
+		"minConfidence": 90,
+		"minScore": 25,
+		"commands": {
+			"fix-build": { "simulateFirst": true },
+			"add-feature": { "simulateFirst": true },
+			"clean": { "simulateFirst": true }
+		}
+	}
+
+- When simulateFirst is enabled, fix-build/add-feature/clean auto-run the corresponding simulate-* command and abort if confidence < minConfidence.
+- After execution, fix-build/add-feature/clean/eval fail (exit code 1) if evaluator score < minScore (CLI flag overrides; policy provides default).
 
 Design
 - AI-native: stable JSON I/O, idempotent ops, atomic git patches
@@ -39,4 +57,9 @@ MVP limitations
 - Diff apply expects standard unified diffs
  - Lint is optional and only runs when a config or npm script is present
  - Sandbox: VM sandbox is for JS only; process sandbox uses allowlist+temp copy (not a kernel container)
+ 
+Notes
+- Run commands from the wow directory so .wow/policy.json is discovered:
+	- cd ./wow
+	- node ./dist/cli.js simulate-fix-build --preview --json
 
