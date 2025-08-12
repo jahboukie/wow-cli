@@ -43,6 +43,10 @@ export async function evaluateProject(cwd?: string): Promise<EvalMetrics> {
 
   let build: EvalMetrics['build'];
   if (scriptFlags.hasBuild) {
+    // Optional fast path: allow skipping build if environment requests it (useful in CI/test to reduce memory churn)
+    if (process.env.WOW_SKIP_BUILD === '1') {
+      build = { code: 0, ms: 0, skipped: true };
+    } else {
     const b = await run('npm run -s build', cwd);
     const nodeModulesPresent = fs.existsSync(path.join(cwd || process.cwd(), 'node_modules'));
     if (!nodeModulesPresent && b.code !== 0) {
@@ -50,6 +54,7 @@ export async function evaluateProject(cwd?: string): Promise<EvalMetrics> {
       build = { code: 0, ms: b.ms, skipped: true };
     } else {
       build = b.code === 127 ? { code: 0, ms: b.ms, skipped: true } : { ...b };
+    }
     }
   } else {
     build = { code: 0, ms: 0, skipped: true };
