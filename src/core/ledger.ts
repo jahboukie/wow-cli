@@ -1,10 +1,11 @@
 import fs from 'fs-extra';
 import path from 'path';
+import { getRunId } from './runContext.js';
 
 export type EventKind = 'info' | 'run' | 'git.apply' | 'git.branch' | 'git.commit' | 'watchdog' | 'error';
 
 export async function logEvent(kind: EventKind, data: any) {
-  const line = JSON.stringify({ ts: new Date().toISOString(), kind, data }) + '\n';
+  const line = JSON.stringify({ ts: new Date().toISOString(), kind, runId: getRunId(), data }) + '\n';
   const file = path.join(process.cwd(), '.wow', 'ledger.ndjson');
   await fs.appendFile(file, line, 'utf-8');
 }

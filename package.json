@@ -7,9 +7,9 @@
     "wow": "dist/cli.js"
   },
   "scripts": {
-  "build": "tsc -p tsconfig.json",
-  "test": "node tests/run-tests.mjs",
-  "lint": "eslint ."
+    "build": "tsc -p tsconfig.json",
+    "test": "node tests/run-tests.mjs",
+  "lint": "eslint src"
   },
   "dependencies": {
     "commander": "^12.1.0",
@@ -19,6 +19,9 @@
   "devDependencies": {
     "@types/fs-extra": "^11.0.4",
     "@types/node": "^22.17.1",
-    "typescript": "^5.6.2"
+    "typescript": "^5.6.2",
+  "eslint": "^9.7.0",
+  "@typescript-eslint/parser": "^7.18.0",
+  "@typescript-eslint/eslint-plugin": "^7.18.0"
   }
 }
