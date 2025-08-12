@@ -10,6 +10,8 @@ export interface ShipOptions {
   deleteBranch?: boolean;
   strategy?: 'squash' | 'merge' | 'rebase';
   allowDirty?: boolean; // proceed even if working tree (non-ephemeral) dirty
+  waitChecks?: boolean; // wait for CI status checks before merge
+  waitTimeoutMs?: number; // timeout for waiting
 }
 
 function out(msg: string, opts: ShipOptions) {
@@ -70,8 +72,9 @@ export async function shipCommand(opts: ShipOptions = {}) {
     out(`Verified locally (score=${verifyPayload?.evaluator?.score})`, opts);
   } catch (e: any) {
     const msg = 'Local verify failed; aborting ship.';
-    if (opts.json) { console.log(JSON.stringify({ ok: false, error: msg })); return; }
-    console.log(msg); return;
+    const fail = { ok: false, error: msg, steps, durationMs: Date.now() - started };
+    if (opts.json) { console.log(JSON.stringify(fail)); return fail; }
+    console.log(msg); return fail;
   }
 
   // Push branch
@@ -102,10 +105,55 @@ export async function shipCommand(opts: ShipOptions = {}) {
     }
   }
 
-  // Merge if requested and PR exists
+  // Optionally wait for status checks
+  if (prUrl && opts.waitChecks && !opts.dryRun) {
+    const startWait = Date.now();
+    const timeout = opts.waitTimeoutMs ?? 10 * 60 * 1000;
+    steps.push({ action: 'checks.wait.start', timeoutMs: timeout });
+    out('Waiting for status checks to complete...', opts);
+    let completed = false;
+    while (!completed && Date.now() - startWait < timeout) {
+      try {
+        const view = await (await import('execa')).execa('gh pr view --json statusCheckRollup');
+        const data = JSON.parse(view.stdout || '{}');
+        const roll = data.statusCheckRollup || [];
+        if (!Array.isArray(roll) || roll.length === 0) {
+          // No checks -> treat as done
+          completed = true;
+          steps.push({ action: 'checks.none' });
+          break;
+        }
+        const pending = roll.filter((c: any) => (c.status && c.status !== 'COMPLETED'));
+        const failed = roll.filter((c: any) => (c.conclusion && c.conclusion !== 'SUCCESS'));
+        if (failed.length) {
+          steps.push({ action: 'checks.failed', failed: failed.map((f: any) => f.name) });
+          out('Some checks failed; skipping auto merge.', opts);
+          opts.noMerge = true; // prevent merge
+          break;
+        }
+        if (pending.length === 0) {
+          completed = true;
+          steps.push({ action: 'checks.success' });
+          out('All checks successful.', opts);
+          break;
+        }
+      } catch (e: any) {
+        // treat error as transient
+        steps.push({ action: 'checks.poll.error', error: (e?.stderr || e?.message || '').slice(0,120) });
+      }
+      await new Promise(r => setTimeout(r, 5000));
+    }
+    if (!completed) {
+      steps.push({ action: 'checks.timeout' });
+      out('Timed out waiting for checks; skipping auto merge.', opts);
+      opts.noMerge = true;
+    }
+  }
+
+  // Merge if requested and PR exists (after optional checks)
   if (!opts.noMerge && !opts.dryRun && prUrl) {
     steps.push({ action: 'pr.merge', strategy: opts.strategy || 'squash' });
-    out('Merging pull request (no wait for checks)', opts);
+    out('Merging pull request', opts);
     await run(`gh pr merge --${opts.strategy || 'squash'} --delete-branch --auto`, opts, true);
   } else if (opts.noMerge) {
     steps.push({ action: 'merge.skip' });

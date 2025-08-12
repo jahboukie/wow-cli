@@ -38,6 +38,7 @@ Commands
  - wow verify [--json] [--story] [--report md] [--advice-limit N] — aggregate project health (build/test/lint/score); non-zero exit if build or test fail; --story gives a narrative summary; --report md prints a markdown report
  - Deltas: simulation & verify JSON outputs include scoreDelta / confidenceDelta once a prior run exists (persisted in .wow/state.json). verify --story and --report md also surface these deltas.
  - wow autofix [--json] — attempt lightweight automated fixes (build, lint --fix) and summarize
+ - wow ship [--dry-run] [--auto-commit msg] [--no-pr] [--no-merge] [--strategy squash|merge|rebase] [--wait-checks] [--wait-timeout-ms N] [--allow-dirty] — automate verify -> push -> PR (gh) -> optional wait + merge.
 
 Policy (.wow/policy.json)
 - Controls defaults for simulate-first and thresholds.
@@ -84,6 +85,19 @@ Evaluator
  - Guidance: `verify`, `simulate-*`, and narrative modes emit `advice[]` + `nextStep` (JSON) or a short “Advice/Next:” section / story text (with --story) to coach non-experts.
 
 Story / Narrative & Reports
+- Shipping / PR Automation (experimental)
+- The `ship` command streamlines contributor workflow: local verify, push branch, create PR (if GitHub CLI available), optionally wait for CI checks, then merge.
+- Ephemeral .wow files (state, ledger, index) are ignored for cleanliness; other changes require a commit or `--auto-commit`.
+- Flags:
+	- --dry-run: print planned steps only.
+	- --auto-commit "msg": commit all changes before shipping.
+	- --no-pr: skip pull request creation.
+	- --no-merge: never attempt automatic merge.
+	- --strategy: merge strategy (squash|merge|rebase) default squash.
+	- --wait-checks: poll PR status checks before merge.
+	- --wait-timeout-ms: override wait timeout (default 600000 ms).
+	- --allow-dirty: proceed even if non-ephemeral files are dirty (not recommended).
+
 - explain <last|run> --story: human-friendly recap of a run timeline.
 - verify --story: narrative project health summary including score/maxScore, deltas (if prior run), key warnings, and next action.
 - verify --report md: structured markdown report (Build/Test/Lint/Score, optional deltas, warnings, advice, next step) ideal for CI artifact or PR comment.
