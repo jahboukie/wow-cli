@@ -191,7 +191,8 @@ program
   .option('--no-pr','Skip creating a pull request')
   .option('--no-merge','Do not attempt merge (always skip)')
   .option('--strategy <s>','Merge strategy (squash|merge|rebase)','squash')
-  .action(async (opts: any) => { await shipCommand({ json: opts.json, dryRun: opts.dryRun, autoCommit: opts.autoCommit, noPr: opts.pr === false, noMerge: opts.merge === false, strategy: opts.strategy }); });
+  .option('--allow-dirty','Proceed even if non-ephemeral files are dirty (not recommended)')
+  .action(async (opts: any) => { await shipCommand({ json: opts.json, dryRun: opts.dryRun, autoCommit: opts.autoCommit, noPr: opts.pr === false, noMerge: opts.merge === false, strategy: opts.strategy, allowDirty: opts.allowDirty }); });
 
 async function main() {
   const rid = newRunId();

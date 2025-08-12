@@ -9,6 +9,7 @@ export interface ShipOptions {
   noMerge?: boolean;
   deleteBranch?: boolean;
   strategy?: 'squash' | 'merge' | 'rebase';
+  allowDirty?: boolean; // proceed even if working tree (non-ephemeral) dirty
 }
 
 function out(msg: string, opts: ShipOptions) {
@@ -29,8 +30,7 @@ async function run(cmd: string, opts: ShipOptions, allowFail = false) {
 export async function shipCommand(opts: ShipOptions = {}) {
   const steps: any[] = [];
   const started = Date.now();
-  await logEvent('info', { msg: 'ship.start' });
-  // Determine current branch
+  // Determine current branch (avoid logging before cleanliness check since ledger write dirties tree)
   const branchRes = await (await import('execa')).execa('git rev-parse --abbrev-ref HEAD', { shell: true });
   const branch = branchRes.stdout.trim();
   if (branch === 'main' || branch === 'master') {
@@ -38,9 +38,15 @@ export async function shipCommand(opts: ShipOptions = {}) {
     if (opts.json) { console.log(JSON.stringify({ ok: false, error: msg })); return; }
     console.log(msg); return;
   }
-  // Detect uncommitted changes
+  // Detect uncommitted changes (filter ephemeral .wow state & ledger files)
   const status = await (await import('execa')).execa('git status --porcelain', { shell: true });
-  const dirty = status.stdout.trim().length > 0;
+  const EPHEMERAL = ['.wow/state.json', '.wow/ledger.ndjson', '.wow/index.json'];
+  const dirtyFiles = status.stdout
+    .split(/\r?\n/)
+    .filter(l => l.trim())
+    .map(l => l.slice(3))
+    .filter(f => f && !EPHEMERAL.includes(f));
+  const dirty = dirtyFiles.length > 0;
   if (dirty && opts.autoCommit) {
     steps.push({ action: 'autoCommit', message: opts.autoCommit });
     out(`Auto committing changes: "${opts.autoCommit}"`, opts);
@@ -48,11 +54,12 @@ export async function shipCommand(opts: ShipOptions = {}) {
       await (await import('execa')).execa('git add .', { shell: true });
       await (await import('execa')).execa(`git commit -m "${opts.autoCommit.replace(/"/g,'\\"')}"`, { shell: true });
     }
-  } else if (dirty) {
+  } else if (dirty && !opts.allowDirty) {
     const msg = 'Working tree has uncommitted changes; pass --auto-commit "msg" to commit them.';
     if (opts.json) { console.log(JSON.stringify({ ok: false, error: msg })); return; }
     console.log(msg); return;
   }
+  await logEvent('info', { msg: 'ship.start', branch });
 
   // Local pre-flight verify (build/test/lint)
   let verifyPayload: any = null;
