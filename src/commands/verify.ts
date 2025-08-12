@@ -31,7 +31,7 @@ export async function verifyCommand(opts: { json?: boolean; story?: boolean; rep
     if (typeof state.lastConfidence === 'number') payload.confidenceDelta = currentConf - state.lastConfidence;
     console.log(JSON.stringify(payload));
   } else {
-    if (opts.report === 'md') {
+  if (opts.report === 'md') {
       const lines: string[] = [];
       lines.push(`# Project Health Report`);
       lines.push('');
@@ -55,6 +55,12 @@ export async function verifyCommand(opts: { json?: boolean; story?: boolean; rep
       lines.push('\n### Next Step');
       lines.push(nextStep);
       console.log(lines.join('\n'));
+    } else if (opts.report === 'html') {
+      const currentConf = Math.round(Math.min(100, (evalSummary.score / evalSummary.maxScore) * 100));
+      const scoreDelta = typeof state.lastScore === 'number' ? (health.score - state.lastScore) : undefined;
+      const confDelta = typeof state.lastConfidence === 'number' ? (currentConf - state.lastConfidence) : undefined;
+      const html = `<!DOCTYPE html><html><head><meta charset='utf-8'/><title>Project Health</title><style>body{font-family:system-ui,Arial,sans-serif;padding:16px;background:#0b0d10;color:#e8edf2;} .ok{color:#5fdd5f} .fail{color:#ff6161} .skipped{color:#999} table{border-collapse:collapse;margin-top:12px;} td,th{border:1px solid #333;padding:4px 8px;} code{background:#111;padding:2px 4px;border-radius:3px;} .section{margin-top:24px;} .delta{color:#8ab4f8;} </style></head><body><h1>Project Health</h1><p><strong>Build:</strong> <span class='${health.build}'>${health.build}</span> &nbsp; <strong>Test:</strong> <span class='${health.test}'>${health.test}</span> &nbsp; <strong>Lint:</strong> <span class='${health.lint}'>${health.lint}</span></p><p><strong>Score:</strong> ${health.score}/${evalSummary.maxScore}${evalSummary.penaltyApplied?` (penalty -${evalSummary.penaltyPoints})`:''} ${scoreDelta!==undefined?`<span class='delta'>(Δ ${scoreDelta})</span>`:''}</p><p><strong>Confidence:</strong> ${currentConf}% ${confDelta!==undefined?`<span class='delta'>(Δ ${confDelta})</span>`:''}</p>${evalSummary.scoreBreakdown?`<p><strong>Breakdown:</strong> build ${evalSummary.scoreBreakdown.build}, test ${evalSummary.scoreBreakdown.test}, lint ${evalSummary.scoreBreakdown.lint}, penalty ${evalSummary.scoreBreakdown.penalty}</p>`:''}${warnings.length?`<div class='section'><h2>Warnings</h2><ul>${warnings.map(w=>`<li>${w}</li>`).join('')}</ul></div>`:''}${limitedAdvice.length?`<div class='section'><h2>Advice</h2><ul>${limitedAdvice.map(a=>`<li>${a}</li>`).join('')}</ul></div>`:''}<div class='section'><h2>Next Step</h2><p>${nextStep}</p></div></body></html>`;
+      console.log(html);
     } else if (opts.story) {
       const lines: string[] = [];
   lines.push(`Project health: build=${health.build}, test=${health.test}, lint=${health.lint}, score=${health.score}/${evalSummary.maxScore}.`);

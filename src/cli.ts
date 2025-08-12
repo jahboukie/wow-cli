@@ -172,7 +172,7 @@ program
   .description('Aggregate project health (build/test/lint/score)')
   .option('--json','JSON output')
   .option('--story','Narrative health summary (text)')
-  .option('--report <fmt>','Generate report (md)')
+    .option('--report <type>', 'output report format (md|html)', 'none')
   .option('--advice-limit <n>','Limit number of advice items', (v)=>parseInt(v,10))
   .action((opts: any) => verifyCommand({ json: opts.json, story: opts.story, report: opts.report, adviceLimit: opts.adviceLimit }));
 
