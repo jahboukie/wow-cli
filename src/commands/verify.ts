@@ -23,7 +23,9 @@ export async function verifyCommand(opts: { json?: boolean; story?: boolean; rep
   const { advice, nextStep } = buildAdvice(evalSummary);
   const limitedAdvice = opts.adviceLimit ? advice.slice(0, opts.adviceLimit) : advice;
   if (opts.json) {
-    const payload: any = { ok: true, verify: health, evaluator: evalSummary, warnings, advice: limitedAdvice, nextStep };
+  const payload: any = { ok: true, verify: health, evaluator: evalSummary, warnings, advice: limitedAdvice, nextStep };
+  if (evalSummary.penaltyApplied) payload.lintPenalty = { points: evalSummary.penaltyPoints, originalScore: evalSummary.originalScore };
+  if (evalSummary.scoreBreakdown) payload.scoreBreakdown = evalSummary.scoreBreakdown;
     if (typeof state.lastScore === 'number') payload.scoreDelta = evalSummary.score - state.lastScore;
     const currentConf = Math.round(Math.min(100, (evalSummary.score / evalSummary.maxScore) * 100));
     if (typeof state.lastConfidence === 'number') payload.confidenceDelta = currentConf - state.lastConfidence;
@@ -36,7 +38,9 @@ export async function verifyCommand(opts: { json?: boolean; story?: boolean; rep
       lines.push(`**Build:** ${health.build}  `);
       lines.push(`**Test:** ${health.test}  `);
       lines.push(`**Lint:** ${health.lint}${warnings.length ? ' (warning)' : ''}  `);
-      lines.push(`**Score:** ${health.score}/${evalSummary.maxScore}`);
+  lines.push(`**Score:** ${health.score}/${evalSummary.maxScore}`);
+  if (evalSummary.penaltyApplied) lines.push(`**Adaptive Penalty:** -${evalSummary.penaltyPoints} (original ${evalSummary.originalScore})`);
+  if (evalSummary.scoreBreakdown) lines.push(`**Breakdown:** build ${evalSummary.scoreBreakdown.build}, test ${evalSummary.scoreBreakdown.test}, lint ${evalSummary.scoreBreakdown.lint}, penalty ${evalSummary.scoreBreakdown.penalty}`);
       if (typeof state.lastScore === 'number') lines.push(`**Score Δ:** ${health.score - state.lastScore}`);
       const currentConf = Math.round(Math.min(100, (evalSummary.score / evalSummary.maxScore) * 100));
       if (typeof state.lastConfidence === 'number') lines.push(`**Confidence Δ:** ${currentConf - state.lastConfidence}`);
@@ -53,7 +57,9 @@ export async function verifyCommand(opts: { json?: boolean; story?: boolean; rep
       console.log(lines.join('\n'));
     } else if (opts.story) {
       const lines: string[] = [];
-      lines.push(`Project health: build=${health.build}, test=${health.test}, lint=${health.lint}, score=${health.score}/${evalSummary.maxScore}.`);
+  lines.push(`Project health: build=${health.build}, test=${health.test}, lint=${health.lint}, score=${health.score}/${evalSummary.maxScore}.`);
+  if (evalSummary.penaltyApplied) lines.push(`Adaptive lint penalty applied: -${evalSummary.penaltyPoints} (original ${evalSummary.originalScore})`);
+  if (evalSummary.scoreBreakdown) lines.push(`Breakdown: build ${evalSummary.scoreBreakdown.build}, test ${evalSummary.scoreBreakdown.test}, lint ${evalSummary.scoreBreakdown.lint}, penalty ${evalSummary.scoreBreakdown.penalty}`);
       if (typeof state.lastScore === 'number') lines.push(`Score delta since last verify: ${health.score - state.lastScore}`);
       const currentConf = Math.round(Math.min(100, (evalSummary.score / evalSummary.maxScore) * 100));
       if (typeof state.lastConfidence === 'number') lines.push(`Confidence delta: ${currentConf - state.lastConfidence}`);

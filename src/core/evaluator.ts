@@ -14,6 +14,7 @@ export type EvalMetrics = {
   originalScore?: number; // before adaptive penalties
   penaltyApplied?: boolean;
   penaltyPoints?: number;
+  scoreBreakdown?: { build: number; test: number; lint: number; penalty: number };
 };
 
 async function run(cmd: string, cwd?: string) {
@@ -27,25 +28,11 @@ async function run(cmd: string, cwd?: string) {
 }
 
 function computeScore(m: { build?: number; buildSkipped?: boolean; test?: number; testSkipped?: boolean; lint?: number; lintSkipped?: boolean }) {
-  let score = 0;
-  // Elevated weights so healthy small projects reach higher confidence sooner
-  if (m.buildSkipped) {
-    // neutral
-  } else if (typeof m.build === 'number') {
-    score += m.build === 0 ? 15 : -15;
-  }
-  if (m.testSkipped) {
-    // neutral
-  } else if (typeof m.test === 'number') {
-    score += m.test === 0 ? 30 : -30;
-  }
-  if (m.lintSkipped) {
-    // neutral
-  } else if (typeof m.lint === 'number') {
-    // treat lint failure as neutral warning for early MVP
-    if (m.lint === 0) score += 10;
-  }
-  return score;
+  let buildPoints = 0, testPoints = 0, lintPoints = 0;
+  if (!m.buildSkipped && typeof m.build === 'number') buildPoints = m.build === 0 ? 15 : -15;
+  if (!m.testSkipped && typeof m.test === 'number') testPoints = m.test === 0 ? 30 : -30;
+  if (!m.lintSkipped && typeof m.lint === 'number') lintPoints = m.lint === 0 ? 10 : 0; // neutral fail
+  return { total: buildPoints + testPoints + lintPoints, buildPoints, testPoints, lintPoints };
 }
 
 export async function evaluateProject(cwd?: string): Promise<EvalMetrics> {
@@ -99,28 +86,32 @@ export async function evaluateProject(cwd?: string): Promise<EvalMetrics> {
   }
 
   const maxScore = 55; // 15+30+10
-  let score = computeScore({ build: build.code, buildSkipped: build.skipped, test: test.code, testSkipped: test.skipped, lint: lint?.code, lintSkipped: lint?.skipped });
+  const scorePieces = computeScore({ build: build.code, buildSkipped: build.skipped, test: test.code, testSkipped: test.skipped, lint: lint?.code, lintSkipped: lint?.skipped });
+  let score = scorePieces.total;
   const originalScore = score;
   // Load policy for configurable adaptive lint penalty
   const policy = await loadPolicy(cwd || process.cwd());
   const penaltyCfg: any = (policy as any).lintPenalty || {};
+  const enabled = penaltyCfg.enabled !== false; // default true
   const threshold = typeof penaltyCfg.threshold === 'number' ? penaltyCfg.threshold : 3;
   const penaltyPoints = typeof penaltyCfg.points === 'number' ? penaltyCfg.points : 5;
   // Adaptive lint penalty: after N consecutive lint failures, apply -penaltyPoints once until a pass resets counter
   const state = await loadState(cwd || process.cwd());
   let lintFailCount = state.lintFailCount || 0;
   let penaltyApplied = false;
-  if (lint && !lint.skipped && lint.code !== 0) {
-    lintFailCount += 1;
-    if (lintFailCount >= threshold) {
-      score -= penaltyPoints; // gentle nudge
-      penaltyApplied = true;
+  if (enabled) {
+    if (lint && !lint.skipped && lint.code !== 0) {
+      lintFailCount += 1;
+      if (lintFailCount >= threshold) {
+        score -= penaltyPoints; // gentle nudge
+        penaltyApplied = true;
+      }
+    } else if (lint && (!lint.skipped && lint.code === 0)) {
+      lintFailCount = 0; // reset on pass
     }
-  } else if (lint && (!lint.skipped && lint.code === 0)) {
-    lintFailCount = 0; // reset on pass
   }
   await saveState({ lintFailCount }, cwd || process.cwd());
-  const summary = { build, test, lint, score, maxScore, originalScore, penaltyApplied, penaltyPoints: penaltyApplied ? penaltyPoints : 0 } as EvalMetrics;
+  const summary = { build, test, lint, score, maxScore, originalScore, penaltyApplied, penaltyPoints: penaltyApplied ? penaltyPoints : 0, scoreBreakdown: { build: scorePieces.buildPoints, test: scorePieces.testPoints, lint: scorePieces.lintPoints, penalty: penaltyApplied ? -penaltyPoints : 0 } } as any as EvalMetrics;
   await logEvent('info', { msg: 'evaluator.summary', summary });
   return summary;
 }

@@ -72,12 +72,13 @@ Evaluator
  - Adaptive lint penalty is configurable in `.wow/policy.json` via a `lintPenalty` block (optional):
 	 ```jsonc
 	 {
-		 "lintPenalty": { "threshold": 3, "points": 5 }
+	"lintPenalty": { "threshold": 3, "points": 5 }
 	 }
 	 ```
 	 Fields:
 	 - threshold: consecutive failing lint evaluations before applying the penalty (default 3)
 	 - points: score points subtracted once threshold reached (default 5)
+   - enabled: set `false` to disable the penalty entirely
 	 Penalty is removed (counter resets) after a successful lint pass.
  - Confidence = (score / 55)*100 capped at 100. Default policy minConfidence: 50 (tunable in `.wow/policy.json`).
  - Guidance: `verify`, `simulate-*`, and narrative modes emit `advice[]` + `nextStep` (JSON) or a short “Advice/Next:” section / story text (with --story) to coach non-experts.
