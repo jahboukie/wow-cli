@@ -1,6 +1,6 @@
 import { logEvent } from './ledger.js';
 
-export type PlanAction = 'run' | 'apply_patch' | 'write' | 'info';
+export type PlanAction = 'run' | 'apply_patch' | 'write' | 'info' | 'triage';
 
 export type PlanNode = {
   id: string;
@@ -18,7 +18,8 @@ export type Plan = {
 export async function planFixBuild(): Promise<Plan> {
   const nodes: PlanNode[] = [
     { id: 'n1', action: 'run', data: { cmd: 'npm test || yarn test || pnpm test' }, criteria: ['tests run'] },
-    { id: 'n2', action: 'info', data: { msg: 'Review test failures. Consider targeted patch then wow apply.' } },
+    { id: 'n2', action: 'triage', data: { query: 'last_error' }, criteria: ['error triaged'] },
+    { id: 'n3', action: 'info', data: { msg: 'Review triage results and test failures. Consider targeted patch then wow apply.' } },
   ];
   const plan: Plan = { kind: 'fix-build', nodes, acceptance: ['build green or failures understood'] };
   await logEvent('info', { msg: 'planner.fix-build', nodes: nodes.length });
@@ -45,9 +46,8 @@ export async function planClean(): Promise<Plan> {
       id: 'n1',
       action: 'run',
       data: {
-        // Cross-platform: try npm run lint, else run eslint --fix only if config exists; swallow failures.
-        cmd:
-          "node -e \"const cp=require('child_process'),fs=require('fs');const run=c=>{try{cp.execSync(c,{stdio:'inherit'})}catch(e){return false}return true};const hasCfg=['eslint.config.js','eslint.config.cjs','eslint.config.mjs','.eslintrc','.eslintrc.js','.eslintrc.cjs','.eslintrc.mjs','.eslintrc.json'].some(f=>fs.existsSync(f));if(!run('npm run -s lint') && hasCfg){run('npx -y eslint . --fix')}\"",
+        // Replaced complex inline script with a dedicated, cross-platform Node.js script
+        cmd: 'node scripts/run-lint.mjs',
       },
       criteria: ['lints run'],
     },

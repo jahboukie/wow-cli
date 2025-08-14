@@ -6,12 +6,18 @@ on:
   pull_request:
     branches: [ "main" ]
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   build:
     runs-on: ${{ matrix.os }}
     strategy:
+      fail-fast: false
       matrix:
         os: [ubuntu-latest, windows-latest, macos-latest]
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -19,10 +25,22 @@ jobs:
           node-version: '22'
           cache: 'npm'
       - name: Install
-        run: npm install
+        run: npm ci
       - name: Build
         run: npm run build
       - name: Test
         run: npm test
       - name: Evaluator threshold
         run: node dist/cli.js eval --min-score 0 --json
+        env:
+          WOW_SKIP_BUILD: '1'
+      - name: Verify health JSON & breakdown
+        run: |
+          node dist/cli.js verify --json > verify.json
+          node -e "const d=require('fs').readFileSync('verify.json','utf8');const j=JSON.parse(d);if(!j.evaluator.scoreBreakdown) {console.error('missing scoreBreakdown');process.exit(1);} if(j.evaluator.score<0){console.error('negative score');process.exit(1);} console.log('verify OK score='+j.evaluator.score);"
+        env:
+          WOW_SKIP_BUILD: '1'
+      - name: Ship dry-run
+        run: node dist/cli.js ship --dry-run --no-pr --no-merge --allow-dirty --json
+        env:
+          WOW_SKIP_BUILD: '1'

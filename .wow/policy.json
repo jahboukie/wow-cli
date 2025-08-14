@@ -1,6 +1,6 @@
 {
   "simulateFirst": true,
-  "minConfidence": 90,
+  "minConfidence": 50,
   "minScore": 25,
   "commands": {
     "fix-build": { "simulateFirst": true },

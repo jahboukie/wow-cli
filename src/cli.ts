@@ -1,5 +1,7 @@
 #!/usr/bin/env node
 import { Command } from 'commander';
+import { newRunId, getRunId } from './core/runContext.js';
+import { logEvent } from './core/ledger.js';
 import { initCommand } from './commands/init.js';
 import { runCommand } from './commands/run.js';
 import { applyCommand } from './commands/apply.js';
@@ -12,6 +14,12 @@ import { cleanCommand } from './commands/clean.js';
 import { evalCommand } from './commands/eval.js';
 import { simulateCommand } from './commands/simulate.js';
 import { simulatePlanCommand } from './commands/simulatePlan.js';
+import { explainCommand } from './commands/explain.js';
+import { hookCommand, scanCommand } from './commands/hook.js';
+import { listFeatures } from './core/entitlement.js';
+import { verifyCommand } from './commands/verify.js';
+import { autofixCommand } from './commands/autofix.js';
+import { shipCommand } from './commands/ship.js';
 
 const program = new Command();
 program.name('wow').description('AI-native coding toolbox (MVP)').version('0.1.0');
@@ -71,8 +79,10 @@ program
   .option('--preview', 'Show file change summary in simulation')
   .option('--patch', 'Include unified diff patch in output (may be large)')
   .option('--summary-only', 'Print only change summary/patch, skip evaluator/confidence')
+  .option('--full-build', 'Run npm install in temp simulation for accurate build signal')
+  .option('--advice-limit <n>', 'Limit number of advice items', (v)=>parseInt(v,10))
   .option('--min-confidence <n>', 'Minimum confidence required', (v) => parseInt(v, 10))
-  .action((opts: any) => simulatePlanCommand('fix-build', { json: opts.json, minConfidence: opts.minConfidence, preview: opts.preview, patch: opts.patch, summaryOnly: opts.summaryOnly }));
+  .action((opts: any) => simulatePlanCommand('fix-build', { json: opts.json, minConfidence: opts.minConfidence, preview: opts.preview, patch: opts.patch, summaryOnly: opts.summaryOnly, fullBuild: opts.fullBuild, adviceLimit: opts.adviceLimit }));
 
 program
   .command('add-feature')
@@ -90,8 +100,10 @@ program
   .option('--preview', 'Show file change summary in simulation')
   .option('--patch', 'Include unified diff patch in output (may be large)')
   .option('--summary-only', 'Print only change summary/patch, skip evaluator/confidence')
+  .option('--full-build', 'Run npm install in temp simulation for accurate build signal')
+  .option('--advice-limit <n>', 'Limit number of advice items', (v)=>parseInt(v,10))
   .option('--min-confidence <n>', 'Minimum confidence required', (v) => parseInt(v, 10))
-  .action((desc: string[], opts: any) => simulatePlanCommand('add-feature', { desc: (desc||[]).join(' ').trim(), json: opts.json, minConfidence: opts.minConfidence, preview: opts.preview, patch: opts.patch, summaryOnly: opts.summaryOnly }));
+  .action((desc: string[], opts: any) => simulatePlanCommand('add-feature', { desc: (desc||[]).join(' ').trim(), json: opts.json, minConfidence: opts.minConfidence, preview: opts.preview, patch: opts.patch, summaryOnly: opts.summaryOnly, fullBuild: opts.fullBuild, adviceLimit: opts.adviceLimit }));
 
 program
   .command('clean')
@@ -107,8 +119,10 @@ program
   .option('--preview', 'Show file change summary in simulation')
   .option('--patch', 'Include unified diff patch in output (may be large)')
   .option('--summary-only', 'Print only change summary/patch, skip evaluator/confidence')
+  .option('--full-build', 'Run npm install in temp simulation for accurate build signal')
+  .option('--advice-limit <n>', 'Limit number of advice items', (v)=>parseInt(v,10))
   .option('--min-confidence <n>', 'Minimum confidence required', (v) => parseInt(v, 10))
-  .action((opts: any) => simulatePlanCommand('clean', { json: opts.json, minConfidence: opts.minConfidence, preview: opts.preview, patch: opts.patch, summaryOnly: opts.summaryOnly }));
+  .action((opts: any) => simulatePlanCommand('clean', { json: opts.json, minConfidence: opts.minConfidence, preview: opts.preview, patch: opts.patch, summaryOnly: opts.summaryOnly, fullBuild: opts.fullBuild, adviceLimit: opts.adviceLimit }));
 
 program
   .command('eval')
@@ -125,4 +139,71 @@ program
   .option('--json', 'JSON output')
   .action((file: string, opts: any) => simulateCommand(file, opts));
 
-program.parseAsync(process.argv);
+program
+  .command('explain')
+  .description('Explain the last run or a specific run id from the ledger')
+  .argument('<which>', 'last|run|list')
+  .option('--run <id>', 'Specific run id when using mode run')
+  .option('--story', 'Narrative summary output (text)')
+  .option('--json', 'JSON output')
+  .action((which: string, opts: any) => explainCommand(which === 'run' ? 'run' : which === 'list' ? 'list' : 'last', { json: opts.json, run: opts.run, story: opts.story }));
+
+program
+  .command('hook')
+  .description('Manage wow git hooks (pre-commit)')
+  .argument('<sub>', 'install')
+  .option('--json','JSON output')
+  .action((sub: string, opts: any) => hookCommand(sub, opts));
+
+program
+  .command('scan')
+  .description('Run secret/policy scan on staged diff')
+  .option('--json','JSON output')
+  .action((opts: any) => scanCommand(opts));
+
+program
+  .command('features')
+  .description('Show current tier and feature availability')
+  .option('--json','JSON output')
+  .action((opts: any) => listFeatures(!opts.json ? true : false));
+
+program
+  .command('verify')
+  .description('Aggregate project health (build/test/lint/score)')
+  .option('--json','JSON output')
+  .option('--story','Narrative health summary (text)')
+    .option('--report <type>', 'output report format (md|html)', 'none')
+  .option('--advice-limit <n>','Limit number of advice items', (v)=>parseInt(v,10))
+  .action((opts: any) => verifyCommand({ json: opts.json, story: opts.story, report: opts.report, adviceLimit: opts.adviceLimit }));
+
+program
+  .command('autofix')
+  .description('Run lightweight automated fixes (build, lint --fix)')
+  .option('--json','JSON output')
+  .action((opts: any) => autofixCommand(opts));
+
+program
+  .command('ship')
+  .description('Automate push + PR (gh) + optional merge for current feature branch')
+  .option('--json','JSON output')
+  .option('--dry-run','Print planned steps without executing')
+  .option('--auto-commit <msg>','Automatically commit all changes with message before shipping')
+  .option('--no-pr','Skip creating a pull request')
+  .option('--no-merge','Do not attempt merge (always skip)')
+  .option('--strategy <s>','Merge strategy (squash|merge|rebase)','squash')
+  .option('--allow-dirty','Proceed even if non-ephemeral files are dirty (not recommended)')
+  .action(async (opts: any) => { await shipCommand({ json: opts.json, dryRun: opts.dryRun, autoCommit: opts.autoCommit, noPr: opts.pr === false, noMerge: opts.merge === false, strategy: opts.strategy, allowDirty: opts.allowDirty }); });
+
+async function main() {
+  const rid = newRunId();
+  await logEvent('info', { msg: 'run.start', argv: process.argv.slice(2), runId: rid });
+  const started = Date.now();
+  try {
+    await program.parseAsync(process.argv);
+  } finally {
+    const dur = Date.now() - started;
+    await logEvent('info', { msg: 'run.end', runId: getRunId(), durationMs: dur, exitCode: process.exitCode || 0 });
+  }
+}
+
+main();

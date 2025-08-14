@@ -1,0 +1,8 @@
+{
+  "name": "penalty-test",
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "lint": "node -e \"process.exit(2)\""
+  }
+}
