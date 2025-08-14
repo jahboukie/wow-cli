@@ -16,11 +16,13 @@ for (const file of files) {
   const cases = Object.entries(mod).filter(([k, v]) => typeof v === 'function');
   for (const [name, fn] of cases) {
     try {
-      await fn();
+      await Promise.resolve(fn()); // Ensure fn is treated as a promise
       results.push({ file, name, ok: true });
       passed++;
-    } catch (e) {
-      results.push({ file, name, ok: false, error: e?.message || String(e) });
+    } catch (e) { // Removed TypeScript-specific type annotation
+      // Provide more detailed error logging, including stack trace if available
+      const errorMessage = e?.stack || e?.message || String(e);
+      results.push({ file, name, ok: false, error: errorMessage });
       failed++;
     }
   }

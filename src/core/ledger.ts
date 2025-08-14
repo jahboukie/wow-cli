@@ -4,9 +4,15 @@ import { getRunId } from './runContext.js';
 
 export type EventKind = 'info' | 'run' | 'git.apply' | 'git.branch' | 'git.commit' | 'watchdog' | 'error';
 
+async function ensureLedgerFile() {
+  const file = path.join(process.cwd(), '.wow', 'ledger.ndjson');
+  await fs.ensureFile(file);
+  return file;
+}
+
 export async function logEvent(kind: EventKind, data: any) {
   const line = JSON.stringify({ ts: new Date().toISOString(), kind, runId: getRunId(), data }) + '\n';
-  const file = path.join(process.cwd(), '.wow', 'ledger.ndjson');
+  const file = await ensureLedgerFile();
   await fs.appendFile(file, line, 'utf-8');
 }
 

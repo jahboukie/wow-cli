@@ -1,6 +1,6 @@
 import { logEvent } from './ledger.js';
 
-export type PlanAction = 'run' | 'apply_patch' | 'write' | 'info';
+export type PlanAction = 'run' | 'apply_patch' | 'write' | 'info' | 'triage';
 
 export type PlanNode = {
   id: string;
@@ -18,7 +18,8 @@ export type Plan = {
 export async function planFixBuild(): Promise<Plan> {
   const nodes: PlanNode[] = [
     { id: 'n1', action: 'run', data: { cmd: 'npm test || yarn test || pnpm test' }, criteria: ['tests run'] },
-    { id: 'n2', action: 'info', data: { msg: 'Review test failures. Consider targeted patch then wow apply.' } },
+    { id: 'n2', action: 'triage', data: { query: 'last_error' }, criteria: ['error triaged'] },
+    { id: 'n3', action: 'info', data: { msg: 'Review triage results and test failures. Consider targeted patch then wow apply.' } },
   ];
   const plan: Plan = { kind: 'fix-build', nodes, acceptance: ['build green or failures understood'] };
   await logEvent('info', { msg: 'planner.fix-build', nodes: nodes.length });
