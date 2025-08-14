@@ -1,3 +1,6 @@
+import typescriptParser from '@typescript-eslint/parser';
+import typescriptPlugin from '@typescript-eslint/eslint-plugin';
+
 // Minimal ESLint flat config for ESM Node projects
 export default [
   {
@@ -5,7 +8,7 @@ export default [
     languageOptions: {
       ecmaVersion: 2022,
       sourceType: "module",
-      parser: require.resolve('@typescript-eslint/parser'),
+      parser: typescriptParser,
       globals: {
         console: 'readonly',
         process: 'readonly',
@@ -16,7 +19,7 @@ export default [
       }
     },
     plugins: {
-      '@typescript-eslint': require('@typescript-eslint/eslint-plugin'),
+      '@typescript-eslint': typescriptPlugin,
     },
     rules: {
       'no-unused-vars': 'warn',
