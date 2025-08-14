@@ -61,8 +61,14 @@ export async function evaluateProject(cwd?: string): Promise<EvalMetrics> {
   }
   let test: EvalMetrics['test'];
   if (scriptFlags.hasTest) {
-    const t = await run('npm -s test', cwd);
-    test = t.code === 127 ? { code: 0, ms: t.ms, skipped: true } : { ...t };
+    // Avoid recursive invocation when running inside npm test or when explicitly skipped via env
+    const skipTest = process.env.WOW_SKIP_TEST === '1' || process.env.npm_lifecycle_event === 'test';
+    if (skipTest) {
+      test = { code: 0, ms: 0, skipped: true };
+    } else {
+      const t = await run('npm -s test', cwd);
+      test = t.code === 127 ? { code: 0, ms: t.ms, skipped: true } : { ...t };
+    }
   } else {
     test = { code: 0, ms: 0, skipped: true };
   }

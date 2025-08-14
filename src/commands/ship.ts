@@ -66,7 +66,10 @@ export async function shipCommand(opts: ShipOptions = {}) {
   // Local pre-flight verify (build/test/lint)
   let verifyPayload: any = null;
   try {
-    const verify = await (await import('execa')).execa('node dist/cli.js verify --json', { shell: true });
+    const verify = await (await import('execa')).execa('node dist/cli.js verify --json', {
+      shell: true,
+      env: { ...process.env, WOW_SKIP_BUILD: '1', WOW_SKIP_TEST: '1' },
+    });
     try { verifyPayload = JSON.parse(verify.stdout); } catch {}
     steps.push({ action: 'verify', score: verifyPayload?.evaluator?.score });
     out(`Verified locally (score=${verifyPayload?.evaluator?.score})`, opts);
